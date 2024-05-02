@@ -1,15 +1,12 @@
-import { getSession } from 'next-auth/react';
-import AuthForm from '../components/AuthForm';
 import { Loading } from '@/components/Loading';
 import { useLoading } from '@/store/loading-context';
+import { getSession } from 'next-auth/react';
+import AuthForm from '../components/Auth/AuthContainer';
 
 function AuthPage() {
   const { loading } = useLoading();
 
-  if (loading) {
-    return <Loading />;
-  }
-  return <AuthForm />;
+  return loading ? <Loading /> : <AuthForm />;
 }
 
 export async function getServerSideProps(context) {

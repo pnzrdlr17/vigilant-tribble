@@ -1,3 +1,5 @@
+import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
+import withLayout from '@/hoc/withLayout';
 import React from 'react';
 
 const TeamPage = () => {
@@ -23,4 +25,4 @@ const TeamPage = () => {
   );
 };
 
-export default TeamPage;
+export default withLayout(TeamPage, DefaultUnprotectedLayout);

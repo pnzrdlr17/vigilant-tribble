@@ -1,13 +1,15 @@
-import Typography from '@mui/material/Typography';
+import { HeroButton } from '@/components/HeroButton';
+import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
 import { Loading } from '@/components/Loading';
+import withLayout from '@/hoc/withLayout';
 import { useLoading } from '@/store/loading-context';
+import Typography from '@mui/material/Typography';
 import { Flex } from 'antd';
 import Image from 'next/image';
-import HeroImg from '../public/images/claudio-testa-iqeG5xA96M4-unsplash.jpg';
-import { HeroButton } from '@/components/HeroButton';
 import { useRouter } from 'next/router';
+import HeroImg from '../public/images/claudio-testa-iqeG5xA96M4-unsplash.jpg';
 
-function HomePage(props) {
+const HomePage = () => {
   const { loading, setLoading } = useLoading();
   const router = useRouter();
   if (loading) {
@@ -15,17 +17,25 @@ function HomePage(props) {
   }
 
   return (
-    <Flex vertical>
+    <Flex vertical align="center">
       <Typography
         variant="overline"
-        align="center"
         color="textSecondary"
         gutterBottom
         fontSize={36}
       >
         Vigilant Tribble
       </Typography>
-      <Flex vertical gap={48}>
+      <Flex
+        vertical
+        gap={48}
+        style={{
+          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+          padding: '16px',
+          maxWidth: '913px',
+          borderRadius: '6px',
+        }}
+      >
         <Flex gap={64} justify="center">
           <Flex
             vertical
@@ -90,6 +100,6 @@ function HomePage(props) {
       </Flex>
     </Flex>
   );
-}
+};
 
-export default HomePage;
+export default withLayout(HomePage, DefaultUnprotectedLayout);

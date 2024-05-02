@@ -1,3 +1,5 @@
+import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
+import withLayout from '@/hoc/withLayout';
 import React from 'react';
 
 const DocsPage = () => {
@@ -32,4 +34,4 @@ const DocsPage = () => {
   );
 };
 
-export default DocsPage;
+export default withLayout(DocsPage, DefaultUnprotectedLayout);

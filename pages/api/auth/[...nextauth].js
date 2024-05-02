@@ -1,7 +1,7 @@
-import { verifyPassword } from '../../../lib/auth';
-import { connectToDatabase } from '../../../lib/db';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { verifyPassword } from '../../../lib/auth';
+import { connectToDatabase } from '../../../lib/db';
 
 export default NextAuth({
   session: {
@@ -12,17 +12,18 @@ export default NextAuth({
     session: async ({ session, token }) => {
       session.id = token.id;
       session.jwt = token.jwt;
-      session.user.firstName = token.firstName;
-      session.user.lastName = token.lastName;
-
+      session.user.name = token.name;
+      session.user.email = token.email;
+      session.user.role = token.role;
       return Promise.resolve(session);
     },
     jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id;
         token.jwt = user.jwt;
-        token.firstName = user.firstName;
-        token.lastName = user.lastName;
+        token.name = user.name;
+        token.email = token.email;
+        token.role = user.role;
       }
       return Promise.resolve(token);
     },
@@ -56,8 +57,8 @@ export default NextAuth({
 
         return {
           email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          name: user.name,
+          role: user.role,
         };
       },
     }),

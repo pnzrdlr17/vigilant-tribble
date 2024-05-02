@@ -1,13 +1,13 @@
-import { Layout, theme, Typography, Button, Flex } from 'antd';
+import { useLoading } from '@/store/loading-context';
+import { Button, Flex, Layout, theme, Typography } from 'antd';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { LeftNav } from './LeftNav';
-import { useLoading } from '@/store/loading-context';
 
 const { Header, Sider, Content, Footer } = Layout;
 const { Title, Text } = Typography;
 
-const App = ({ children }) => {
+const DefaultUnprotectedLayout = ({ children }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -69,7 +69,10 @@ const App = ({ children }) => {
               }}
               onClick={async () => {
                 setLoading(true);
-                await router.push('/auth');
+                await router.push({
+                  pathname: '/auth',
+                  query: { from: router.pathname },
+                });
                 setLoading(false);
               }}
             >
@@ -85,9 +88,9 @@ const App = ({ children }) => {
         <Layout>
           <Content
             style={{
-              margin: '16px 12px',
-              padding: 24,
-              minHeight: 280,
+              margin: '16px 12px 0 12px',
+              padding: '24px 24px 0 24px',
+              minHeight: 600,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
               overflow: 'clip',
@@ -95,7 +98,9 @@ const App = ({ children }) => {
           >
             {children}
           </Content>
-          <Footer>
+          <Footer
+            style={{ height: '50px', padding: '8px 50px', lineHeight: '32px' }}
+          >
             <Text type="secondary" style={{ textAlign: 'center' }}>
               © 2024 Vigilant Tribble. All rights reserved.
             </Text>
@@ -106,4 +111,4 @@ const App = ({ children }) => {
   );
 };
 
-export { App };
+export { DefaultUnprotectedLayout };

@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
+import withLayout from '@/hoc/withLayout';
+import { useEffect, useState } from 'react';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -19,6 +21,7 @@ const Notifications = () => {
   }, []);
 
   return (
+    //content available on /page for reference
     <div>
       <h1>Latest Notifications</h1>
       {notifications.length === 0 ? (
@@ -34,4 +37,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default withLayout(Notifications, DefaultUnprotectedLayout);

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
+import withLayout from '@/hoc/withLayout';
+import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
 
 const ContactUs = () => {
   const onFinish = (values) => {
@@ -45,4 +47,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default withLayout(ContactUs, DefaultUnprotectedLayout);
