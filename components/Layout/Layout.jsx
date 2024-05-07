@@ -1,7 +1,7 @@
-import { useLoading } from '@/store/loading-context';
 import { Button, Flex, Layout, theme, Typography } from 'antd';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useLoading } from '../../store/loading-context';
 import { LeftNav } from './LeftNav';
 
 const { Header, Sider, Content, Footer } = Layout;
@@ -22,7 +22,7 @@ const DefaultUnprotectedLayout = ({ children }) => {
           padding: '8px 16px',
         }}
       >
-        <Flex justify="space-between" align="center">
+        <Flex justify="space-between" align="baseline">
           <Title
             style={{
               fontWeight: 600,
@@ -39,46 +39,67 @@ const DefaultUnprotectedLayout = ({ children }) => {
               setLoading(false);
             }}
           >
-            Vigilant Tribble
+            Career Connect
           </Title>
-          {session ? (
-            <Button
-              type="link"
-              style={{
-                textDecoration: 'none',
-                fontVariant: 'small-caps',
-                color: 'white',
-                fontSize: '1.15rem',
-              }}
-              onClick={async () => {
-                setLoading(true);
-                await signOut();
-                setLoading(false);
-              }}
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button
-              type="link"
-              style={{
-                textDecoration: 'none',
-                fontVariant: 'small-caps',
-                color: 'white',
-                fontSize: '1.15rem',
-              }}
-              onClick={async () => {
-                setLoading(true);
-                await router.push({
-                  pathname: '/auth',
-                  query: { from: router.pathname },
-                });
-                setLoading(false);
-              }}
-            >
-              Sign In
-            </Button>
-          )}
+
+          <Flex gap={8}>
+            {session ? (
+              <>
+                <Button
+                  type="link"
+                  style={{
+                    textDecoration: 'none',
+                    fontVariant: 'small-caps',
+                    color: 'white',
+                    fontSize: '1.15rem',
+                  }}
+                  onClick={async () => {
+                    setLoading(true);
+                    await router.push('/dashboard');
+                    setLoading(false);
+                  }}
+                >
+                  Dashboard
+                </Button>
+                <Button
+                  type="link"
+                  style={{
+                    textDecoration: 'none',
+                    fontVariant: 'small-caps',
+                    color: 'white',
+                    fontSize: '1.15rem',
+                  }}
+                  onClick={async () => {
+                    setLoading(true);
+                    await signOut();
+                    setLoading(false);
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button
+                type="link"
+                style={{
+                  textDecoration: 'none',
+                  fontVariant: 'small-caps',
+                  color: 'white',
+                  fontSize: '1.15rem',
+                }}
+                onClick={async () => {
+                  setLoading(true);
+                  await router.push({
+                    pathname: '/auth',
+                    query: { from: router.pathname },
+                  });
+                  setLoading(false);
+                }}
+              >
+                Sign In
+              </Button>
+            )}
+          </Flex>
         </Flex>
       </Header>
       <Layout>

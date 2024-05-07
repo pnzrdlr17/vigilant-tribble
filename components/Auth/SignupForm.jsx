@@ -1,30 +1,10 @@
-import { useLoading } from '@/store/loading-context';
 import { Button, Flex, Form, Input, Radio } from 'antd';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useLoading } from '../../store/loading-context';
+import { createUser } from '../../util/auth';
 import styles from './index.module.css';
-
-const createUser = async (user) => {
-  const response = await fetch('/api/auth/signup', {
-    method: 'POST',
-    body: JSON.stringify(user),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(
-      data.message,
-      'Something went wrong, failed creating account!'
-    );
-  }
-
-  return data;
-};
 
 const SignupForm = () => {
   const [form] = Form.useForm();

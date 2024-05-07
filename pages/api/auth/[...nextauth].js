@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { verifyPassword } from '../../../lib/auth';
-import { connectToDatabase } from '../../../lib/db';
+import { verifyPassword } from '../../../util/auth';
+import { connectToDatabase } from '../../../util/db';
 
 export default NextAuth({
   session: {
@@ -22,7 +22,7 @@ export default NextAuth({
         token.id = user.id;
         token.jwt = user.jwt;
         token.name = user.name;
-        token.email = token.email;
+        token.email = user.email;
         token.role = user.role;
       }
       return Promise.resolve(token);

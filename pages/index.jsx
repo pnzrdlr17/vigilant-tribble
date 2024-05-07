@@ -1,13 +1,13 @@
-import { HeroButton } from '@/components/HeroButton';
-import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
-import { Loading } from '@/components/Loading';
-import withLayout from '@/hoc/withLayout';
-import { useLoading } from '@/store/loading-context';
 import Typography from '@mui/material/Typography';
 import { Flex } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import HeroImg from '../public/images/claudio-testa-iqeG5xA96M4-unsplash.jpg';
+import { HeroButton } from '../components/HeroButton';
+import { DefaultUnprotectedLayout } from '../components/Layout/Layout';
+import { Loading } from '../components/Loading';
+import withLayout from '../hoc/withLayout';
+import HeroImg from '../public/images/HeroImage.jpg';
+import { useLoading } from '../store/loading-context';
 
 const HomePage = () => {
   const { loading, setLoading } = useLoading();
@@ -18,14 +18,14 @@ const HomePage = () => {
 
   return (
     <Flex vertical align="center">
-      <Typography
+      {/* <Typography
         variant="overline"
         color="textSecondary"
         gutterBottom
         fontSize={36}
       >
         Vigilant Tribble
-      </Typography>
+      </Typography> */}
       <Flex
         vertical
         gap={48}
@@ -34,6 +34,7 @@ const HomePage = () => {
           padding: '16px',
           maxWidth: '913px',
           borderRadius: '6px',
+          marginTop: '48px',
         }}
       >
         <Flex gap={64} justify="center">
@@ -72,7 +73,7 @@ const HomePage = () => {
             bgColor="#1677ff"
             onClick={async () => {
               setLoading(true);
-              await router.push('/recruiters');
+              await router.push('/recruiter');
               setLoading(false);
             }}
           />
@@ -82,7 +83,7 @@ const HomePage = () => {
             bgColor="#002140"
             onClick={async () => {
               setLoading(true);
-              router.push('/students');
+              router.push('/student');
               setLoading(false);
             }}
           />

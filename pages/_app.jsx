@@ -1,8 +1,7 @@
-import { LoadingProvider } from '@/store/loading-context';
-import '@/styles/globals.css';
 import { ConfigProvider } from 'antd';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
+import { LoadingProvider } from '../store/loading-context';
 
 export default function App({ Component, pageProps }) {
   return (

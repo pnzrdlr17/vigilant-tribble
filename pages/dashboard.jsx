@@ -1,9 +1,8 @@
-import { StudentDashboard } from '@/components/Dashboard/StudentDashboard';
-import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
-import { Loading } from '@/components/Loading';
-import withLayout from '@/hoc/withLayout';
-import { useLoading } from '@/store/loading-context';
 import { getSession } from 'next-auth/react';
+import RecruiterDashboard from '../components/Dashboard/RecruiterDashboard';
+import StudentDashboard from '../components/Dashboard/StudentDashboard';
+import { Loading } from '../components/Loading';
+import { useLoading } from '../store/loading-context';
 
 const Dashboard = (props) => {
   const { loading } = useLoading();
@@ -18,13 +17,11 @@ const Dashboard = (props) => {
   }
 
   if (session?.user?.role === 'recruiter') {
-    // return <RecruiterDashboard />;
-    return <StudentDashboard />;
+    return <RecruiterDashboard />;
   }
 
   if (session?.user?.role === 'admin') {
-    // return <AdminDashboard />;
-    return <StudentDashboard />;
+    return <RecruiterDashboard />;
   }
 
   return <Error statusCode={404} />;
@@ -49,4 +46,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default withLayout(Dashboard, DefaultUnprotectedLayout);
+export default Dashboard;

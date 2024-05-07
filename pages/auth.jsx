@@ -1,7 +1,7 @@
-import { Loading } from '@/components/Loading';
-import { useLoading } from '@/store/loading-context';
 import { getSession } from 'next-auth/react';
 import AuthForm from '../components/Auth/AuthContainer';
+import { Loading } from '../components/Loading';
+import { useLoading } from '../store/loading-context';
 
 function AuthPage() {
   const { loading } = useLoading();

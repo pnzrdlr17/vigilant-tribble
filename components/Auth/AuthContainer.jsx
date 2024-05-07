@@ -1,9 +1,9 @@
-import LoginPageIllustration from '@/public/images/LoginPageIllustration.svg';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button, Flex } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import LoginPageIllustration from '../../public/images/LoginPageIllustration.svg';
 import { LoginForm } from './LoginForm';
 import { SignupForm } from './SignupForm';
 

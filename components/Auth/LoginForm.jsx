@@ -1,7 +1,7 @@
-import { useLoading } from '@/store/loading-context';
 import { Button, Flex, Form, Input } from 'antd';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useLoading } from '../../store/loading-context';
 import styles from './index.module.css';
 
 const LoginForm = () => {
