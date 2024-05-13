@@ -1,6 +1,5 @@
-import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
-import withLayout from '@/hoc/withLayout';
-import React from 'react';
+import { DefaultUnprotectedLayout } from '../components/Layout/Layout';
+import withLayout from '../hoc/withLayout';
 
 const DocsPage = () => {
   // Fetch documents and policies data from an API or define it here

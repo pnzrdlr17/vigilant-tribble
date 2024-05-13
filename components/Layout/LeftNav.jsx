@@ -1,10 +1,10 @@
 import {
-  HomeOutlined,
-  TeamOutlined,
-  InfoCircleOutlined,
   BookOutlined,
-  NotificationOutlined,
+  HomeOutlined,
+  InfoCircleOutlined,
   MessageOutlined,
+  NotificationOutlined,
+  TeamOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useRouter } from 'next/router';
@@ -36,11 +36,11 @@ const LeftNav = () => {
             },
           },
           {
-            key: '/notifications',
+            key: '/announcements',
             icon: <NotificationOutlined />,
-            label: 'Notifications',
+            label: 'Announcements',
             onClick: () => {
-              router.push('/notifications');
+              router.push('/announcements');
             },
           },
           {

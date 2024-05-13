@@ -1,9 +1,9 @@
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Typography } from '@mui/material';
 import { Collapse, Flex } from 'antd';
-import { DefaultUnprotectedLayout } from '../components/Layout/Layout';
-import withLayout from '../hoc/withLayout';
-import { recruiterFaqItems } from '../util/faqs';
+import { StudentLayout } from '../../components/Layout/StudentLayout';
+import withLayout from '../../hoc/withLayout';
+import { studentFaqItems } from '../../util/faqs';
 
 const FAQPage = () => {
   return (
@@ -18,15 +18,26 @@ const FAQPage = () => {
           Frequently Asked Questions
         </Typography>
       </div>
+      <div>
+        <Typography
+          variant="overline"
+          color="textSecondary"
+          gutterBottom
+          style={{ fontSize: '20px', height: '26px' }}
+        >
+          For Students
+        </Typography>
+      </div>
       <Collapse
         accordion
+        bordered={false}
         collapsible="header"
-        items={recruiterFaqItems}
+        items={studentFaqItems}
         style={{
           width: '75%',
           marginTop: '20px',
           overflowY: 'scroll',
-          maxHeight: '480px',
+          maxHeight: '466px',
         }}
         expandIconPosition="end"
         expandIcon={(panelProps) =>
@@ -38,4 +49,4 @@ const FAQPage = () => {
   );
 };
 
-export default withLayout(FAQPage, DefaultUnprotectedLayout);
+export default withLayout(FAQPage, StudentLayout);

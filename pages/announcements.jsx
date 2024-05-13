@@ -1,8 +1,8 @@
-import { DefaultUnprotectedLayout } from '@/components/Layout/Layout';
-import withLayout from '@/hoc/withLayout';
 import { useEffect, useState } from 'react';
+import { DefaultUnprotectedLayout } from '../components/Layout/Layout';
+import withLayout from '../hoc/withLayout';
 
-const Notifications = () => {
+const Announcements = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const Notifications = () => {
   );
 };
 
-export default withLayout(Notifications, DefaultUnprotectedLayout);
+export default withLayout(Announcements, DefaultUnprotectedLayout);

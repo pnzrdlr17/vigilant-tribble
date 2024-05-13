@@ -2,7 +2,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import { Typography } from '@mui/material';
 import { Breadcrumb, Flex } from 'antd';
 import { useRouter } from 'next/router';
-import { GridCard } from '../../components/GridCard';
+import { GridCard } from '../../components/Card/GridCard';
 import { DefaultUnprotectedLayout } from '../../components/Layout/Layout';
 import { Loading } from '../../components/Loading';
 import withLayout from '../../hoc/withLayout';

@@ -2,7 +2,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import { Typography } from '@mui/material';
 import { Breadcrumb, Flex } from 'antd';
 import { useRouter } from 'next/router';
-import { GridCard } from '../../components/GridCard';
+import { GridCard } from '../../components/Card/GridCard';
 import { DefaultUnprotectedLayout } from '../../components/Layout/Layout';
 import { Loading } from '../../components/Loading';
 import withLayout from '../../hoc/withLayout';
@@ -95,7 +95,7 @@ const StudentPublicPage = () => {
             />
             <GridCard
               title="Resume Building"
-              description="Convenient and user-friendly platforms like Overleaf, Figma and Nitish.io for creating resumes adhering to the IITG CV format."
+              description="Convenient and user-friendly platforms like Overleaf and Figma for creating professional resumes."
               buttons={[
                 {
                   label: 'LaTeX',
@@ -121,7 +121,12 @@ const StudentPublicPage = () => {
               title="FAQs"
               description="Compilation for students addressing various queries, including resume-related doubts. If none answer your queries, contact the SPCs."
               buttons={[
-                { label: 'FAQ Page', onClick: () => {} },
+                {
+                  label: 'FAQ Page',
+                  onClick: () => {
+                    router.push('/student/faqs');
+                  },
+                },
                 { label: 'Contact SPCs', onClick: () => {} },
               ]}
             />
