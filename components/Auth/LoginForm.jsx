@@ -20,13 +20,15 @@ const LoginForm = () => {
         email: values.email,
         password: values.password,
       });
-      enqueueSnackbar(`You are Logged In`, { variant: 'success' });
+
+      console.log('Login result:', result);
+
       if (!result.error) {
-        enqueueSnackbar(`Login Failed`, { variant: 'error' });
+        enqueueSnackbar(`You are Logged In`, { variant: 'success' });
         await router.replace('/dashboard');
       }
     } catch (error) {
-      enqueueSnackbar(`Login Failed`, { variant: 'error' });
+      enqueueSnackbar('Error logging in!', { variant: 'error' });
       console.error('Error logging in!', error);
     } finally {
       form.resetFields();
