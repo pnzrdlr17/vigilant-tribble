@@ -1,4 +1,4 @@
-import { getServerSession } from 'next-auth';
+import { getSession } from 'next-auth/react';
 import Error from 'next/error';
 import RecruiterDashboard from '../components/Dashboard/RecruiterDashboard';
 import StudentDashboard from '../components/Dashboard/StudentDashboard';
@@ -38,7 +38,7 @@ const Dashboard = (props) => {
 };
 
 export async function getServerSideProps(context) {
-  const session = await getServerSession(context);
+  const session = await getSession(context);
 
   if (!session) {
     return {
