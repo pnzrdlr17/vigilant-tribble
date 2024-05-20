@@ -2,9 +2,10 @@ import { Button, Flex, Layout, theme, Typography } from 'antd';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useLoading } from '../../store/loading-context';
+import { Footer } from './Footer';
 import { LeftNav } from './LeftNav';
 
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Sider, Content } = Layout;
 const { Title, Text } = Typography;
 
 const DefaultUnprotectedLayout = ({ children }) => {
@@ -119,24 +120,7 @@ const DefaultUnprotectedLayout = ({ children }) => {
           >
             {children}
           </Content>
-          <Footer
-            style={{ height: '50px', padding: '8px 50px', lineHeight: '32px' }}
-          >
-            <Flex justify="space-between">
-              <Text type="secondary" style={{ textAlign: 'center' }}>
-                © 2024 Vigilant Tribble. All rights reserved.
-              </Text>
-              <Button
-                type="link"
-                onClick={() => {
-                  router.push('/feedback');
-                }}
-                style={{ color: 'gray' }}
-              >
-                <u>Leave us a feedback</u>
-              </Button>
-            </Flex>
-          </Footer>
+          <Footer />
         </Layout>
       </Layout>
     </Layout>

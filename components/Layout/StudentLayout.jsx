@@ -2,8 +2,9 @@ import { Button, Flex, Layout, theme, Typography } from 'antd';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useLoading } from '../../store/loading-context';
+import { Footer } from './Footer';
 
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Sider, Content } = Layout;
 const { Title, Text } = Typography;
 
 const navButtonsStyle = {
@@ -118,13 +119,8 @@ const StudentLayout = ({ children }) => {
           >
             {children}
           </Content>
-          <Footer
-            style={{ height: '50px', padding: '8px 50px', lineHeight: '32px' }}
-          >
-            <Text type="secondary" style={{ textAlign: 'center' }}>
-              © 2024 Vigilant Tribble. All rights reserved.
-            </Text>
-          </Footer>
+
+          <Footer />
         </Layout>
       </Layout>
     </Layout>

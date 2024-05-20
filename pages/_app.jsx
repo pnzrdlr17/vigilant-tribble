@@ -1,7 +1,7 @@
 import { ConfigProvider } from 'antd';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
-import SnackbarProviderWrapper from '../components/snackbar';
+import SnackbarProviderWrapper from '../components/Snackbar';
 import { LoadingProvider } from '../store/loading-context';
 
 export default function App({ Component, pageProps }) {

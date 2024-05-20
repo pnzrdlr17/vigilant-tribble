@@ -43,7 +43,6 @@ const ChatArea = (props) => {
         session,
       });
 
-      // send notification to the receiver
       await notificationToUser(
         {
           type: 'new-message',
