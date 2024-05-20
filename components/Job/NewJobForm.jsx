@@ -1,16 +1,19 @@
-import { Button, Flex, Form, Input } from 'antd';
+import { Button, Flex, Form, Input, Select } from 'antd';
+import { useSnackbar } from 'notistack';
 import { useLoading } from '../../store/loading-context';
 import { createJob } from '../../util/job';
+import { notificationToAllStudents } from '../../util/notifications';
+
+const { Option } = Select;
 
 const NewJobForm = (props) => {
   const [form] = Form.useForm();
   const { setLoading } = useLoading();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (values) => {
     try {
       const session = props.session;
-      console.log('Form values:', values, session);
-
       setLoading(true);
 
       const newJob = await createJob({
@@ -18,11 +21,20 @@ const NewJobForm = (props) => {
         ...values,
       });
 
-      // enqueueSnackbar('Job Created Successfully', {
-      //   variant: 'success',
-      // });
+      enqueueSnackbar('Job Created Successfully', {
+        variant: 'success',
+      });
 
-      console.log('Job created', newJob);
+      console.log('Job created', newJob.data.insertedId);
+      await notificationToAllStudents({
+        type: 'new-job',
+        title: `New Job: ${values.title}`,
+        text: `A new job has been posted by ${values.company} in ${values.location}. Apply now!`,
+        link: `/job/${newJob.data.insertedId}`,
+        isSystemGenerated: true,
+        session,
+      });
+      enqueueSnackbar('Notification sent to all students', { variant: 'info' });
     } catch (error) {
       console.error('Error creating job!', error);
     } finally {
@@ -47,16 +59,22 @@ const NewJobForm = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Description"
-              name="description"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please enter the job description',
-                },
-              ]}
+              label="Job Type"
+              name="jobType"
+              rules={[{ required: true, message: 'Please select a job type' }]}
             >
-              <Input.TextArea />
+              <Select>
+                <Option value="full-time">Full Time</Option>
+                <Option value="internship">Internship</Option>
+                <Option value="part-time">Part Time</Option>
+                <Option value="contract">Contract</Option>
+                <Option value="freelance">Freelance</Option>
+                <Option value="other">Other</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label="Domain" name="domain">
+              <Input />
             </Form.Item>
 
             <Form.Item
@@ -81,6 +99,19 @@ const NewJobForm = (props) => {
             </Form.Item>
 
             <Form.Item
+              label="Description"
+              name="description"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter the job description',
+                },
+              ]}
+            >
+              <Input.TextArea rows={3} />
+            </Form.Item>
+
+            <Form.Item
               label="Requirements"
               name="requirements"
               rules={[
@@ -90,10 +121,7 @@ const NewJobForm = (props) => {
                 },
               ]}
             >
-              <Input.TextArea />
-            </Form.Item>
-            <Form.Item label="Domain" name="domain">
-              <Input />
+              <Input.TextArea rows={3} />
             </Form.Item>
           </Flex>
         </Flex>

@@ -1,6 +1,7 @@
 import { ConfigProvider } from 'antd';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
+import SnackbarProviderWrapper from '../components/snackbar';
 import { LoadingProvider } from '../store/loading-context';
 
 export default function App({ Component, pageProps }) {
@@ -9,17 +10,18 @@ export default function App({ Component, pageProps }) {
       theme={{
         token: {
           colorPrimary: '#002140',
-          // colorPrimary: '#001529',
         },
       }}
     >
       <LoadingProvider>
         <SessionProvider session={pageProps.session}>
-          <Head>
-            <title>Vigilant Tribble</title>
-            <link rel="shortcut icon" href="/images/favicon.ico" />
-          </Head>
-          <Component {...pageProps} />
+          <SnackbarProviderWrapper>
+            <Head>
+              <title>Vigilant Tribble</title>
+              <link rel="shortcut icon" href="/images/favicon.ico" />
+            </Head>
+            <Component {...pageProps} />
+          </SnackbarProviderWrapper>
         </SessionProvider>
       </LoadingProvider>
     </ConfigProvider>

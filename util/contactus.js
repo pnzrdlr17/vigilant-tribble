@@ -15,3 +15,26 @@ export const logMessage = async (data) => {
 
   return responseData;
 };
+
+export const logFeedback = async (message) => {
+  if (!message) {
+    throw new Error('Invalid input');
+  }
+  const response = await fetch('/api/feedback', {
+    method: 'POST',
+    body: JSON.stringify({
+      message,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseData.message || 'Something went wrong!');
+  }
+
+  return responseData;
+};

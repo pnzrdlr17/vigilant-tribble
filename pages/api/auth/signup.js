@@ -1,5 +1,5 @@
-import { hashPassword } from '../../../lib/auth';
-import { connectToDatabase } from '../../../lib/db';
+import { hashPassword } from '../../../util/auth';
+import { connectToDatabase } from '../../../util/db';
 
 async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -32,6 +32,8 @@ async function handler(req, res) {
     name: name,
     password: hashedPassword,
     role: role,
+    applications: [],
+    savedJobs: [],
   });
 
   res.status(201).json({ message: 'Created user successfully!', data: result });

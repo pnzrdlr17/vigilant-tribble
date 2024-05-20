@@ -81,16 +81,36 @@ const StudentPublicPage = () => {
             internship NOC form, collaborative research declaration form
             and more"
               buttons={[
-                { label: 'Eligibility', onClick: () => {} },
-                { label: 'Policies', onClick: () => {} },
+                {
+                  label: 'Eligibility',
+                  onClick: () => {
+                    router.push('/docs');
+                  },
+                },
+                {
+                  label: 'Policies',
+                  onClick: () => {
+                    router.push('/docs');
+                  },
+                },
               ]}
             />
             <GridCard
               title="Portals"
               description="The internship and placement portals for students offer comprehensive platforms to discover, apply, and secure placements and internships"
               buttons={[
-                { label: 'Placement', onClick: () => {} },
-                { label: 'Internship', onClick: () => {} },
+                {
+                  label: 'Placement',
+                  onClick: () => {
+                    router.push('/dashboard');
+                  },
+                },
+                {
+                  label: 'Internship',
+                  onClick: () => {
+                    router.push('/dashboard');
+                  },
+                },
               ]}
             />
             <GridCard
@@ -127,7 +147,12 @@ const StudentPublicPage = () => {
                     router.push('/student/faqs');
                   },
                 },
-                { label: 'Contact SPCs', onClick: () => {} },
+                {
+                  label: 'Contact SPCs',
+                  onClick: () => {
+                    router.push('/team');
+                  },
+                },
               ]}
             />
           </Flex>

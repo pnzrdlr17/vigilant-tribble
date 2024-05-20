@@ -1,3 +1,5 @@
+import { Typography } from '@mui/material';
+import { Divider, Flex } from 'antd';
 import { useEffect, useState } from 'react';
 import { DefaultUnprotectedLayout } from '../components/Layout/Layout';
 import withLayout from '../hoc/withLayout';
@@ -6,12 +8,11 @@ const Announcements = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    // Fetch the latest public notifications from the training and placement cell API
     const fetchNotifications = async () => {
       try {
-        const response = await fetch('/api/notifications');
-        const data = await response.json();
-        setNotifications(data);
+        // const response = await fetch('/api/notifications');
+        // const data = await response.json();
+        // setNotifications(data);
       } catch (error) {
         console.error('Error fetching notifications:', error);
       }
@@ -21,11 +22,20 @@ const Announcements = () => {
   }, []);
 
   return (
-    //content available on /page for reference
-    <div>
-      <h1>Latest Notifications</h1>
+    <Flex vertical align="center" gap={16}>
+      <Typography
+        variant="overline"
+        color="textSecondary"
+        gutterBottom
+        style={{ height: '48px', fontSize: '30px' }}
+      >
+        Announcements
+      </Typography>
+      <Divider style={{ margin: '10px 0' }} />
       {notifications.length === 0 ? (
-        <p>No notifications found.</p>
+        <Typography variant="subtitle1" gutterBottom>
+          No new Announcements!
+        </Typography>
       ) : (
         <ul>
           {notifications.map((notification) => (
@@ -33,7 +43,7 @@ const Announcements = () => {
           ))}
         </ul>
       )}
-    </div>
+    </Flex>
   );
 };
 

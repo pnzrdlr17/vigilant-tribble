@@ -1,6 +1,7 @@
 import { Button, Flex, Form, Input } from 'antd';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
 import { useLoading } from '../../store/loading-context';
 import styles from './index.module.css';
 
@@ -8,6 +9,7 @@ const LoginForm = () => {
   const [form] = Form.useForm();
   const { setLoading } = useLoading();
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (values) => {
     try {
@@ -18,11 +20,13 @@ const LoginForm = () => {
         email: values.email,
         password: values.password,
       });
-      //   enqueueSnackbar(`You are Logged In`, { variant: 'success' });
+      enqueueSnackbar(`You are Logged In`, { variant: 'success' });
       if (!result.error) {
+        enqueueSnackbar(`Login Failed`, { variant: 'error' });
         await router.replace('/dashboard');
       }
     } catch (error) {
+      enqueueSnackbar(`Login Failed`, { variant: 'error' });
       console.error('Error logging in!', error);
     } finally {
       form.resetFields();

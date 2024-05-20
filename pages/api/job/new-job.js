@@ -7,6 +7,7 @@ async function handler(req, res) {
 
   const {
     title,
+    jobType,
     company,
     description,
     location,
@@ -34,6 +35,7 @@ async function handler(req, res) {
 
   const result = await jobsCollection.insertOne({
     title,
+    jobType,
     company,
     description,
     location,

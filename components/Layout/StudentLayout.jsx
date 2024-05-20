@@ -1,5 +1,5 @@
 import { Button, Flex, Layout, theme, Typography } from 'antd';
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useLoading } from '../../store/loading-context';
 
@@ -18,6 +18,7 @@ const StudentLayout = ({ children }) => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   const router = useRouter();
+  const currentPath = router.pathname;
   const { data: session } = useSession();
   const { setLoading } = useLoading();
 
@@ -49,7 +50,7 @@ const StudentLayout = ({ children }) => {
           </Title>
 
           <Flex gap={8}>
-            {router.pathname !== '/dashboard' && (
+            {currentPath !== '/dashboard' && (
               <Button
                 type="link"
                 style={navButtonsStyle}
@@ -62,51 +63,42 @@ const StudentLayout = ({ children }) => {
                 Dashboard
               </Button>
             )}
-            <Button
-              type="link"
-              style={navButtonsStyle}
-              onClick={async () => {
-                setLoading(true);
-                await router.push('/jobs');
-                setLoading(false);
-              }}
-            >
-              Jobs
-            </Button>
-            <Button
-              type="link"
-              style={navButtonsStyle}
-              onClick={async () => {
-                setLoading(true);
-                await router.push('/applications');
-                setLoading(false);
-              }}
-            >
-              Applications
-              {/* job progress, drafts, interview schedules */}
-            </Button>
-            <Button
-              type="link"
-              style={navButtonsStyle}
-              onClick={async () => {
-                setLoading(true);
-                await router.push('/inbox');
-                setLoading(false);
-              }}
-            >
-              Inbox
-            </Button>
-            {session && (
+            {currentPath !== '/applications' && (
               <Button
                 type="link"
                 style={navButtonsStyle}
                 onClick={async () => {
                   setLoading(true);
-                  await signOut();
+                  await router.push('/applications');
                   setLoading(false);
                 }}
               >
-                Logout
+                Applications
+                {/* job progress, drafts, interview schedules */}
+              </Button>
+            )}
+            {currentPath !== '/inbox' && (
+              <Button
+                type="link"
+                style={navButtonsStyle}
+                onClick={async () => {
+                  setLoading(true);
+                  await router.push('/inbox');
+                  setLoading(false);
+                }}
+              >
+                Inbox
+              </Button>
+            )}
+            {session && (
+              <Button
+                type="link"
+                style={navButtonsStyle}
+                onClick={async () => {
+                  router.push('/profile');
+                }}
+              >
+                Profile
               </Button>
             )}
           </Flex>

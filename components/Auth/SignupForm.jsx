@@ -1,6 +1,7 @@
 import { Button, Flex, Form, Input, Radio } from 'antd';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useLoading } from '../../store/loading-context';
 import { createUser } from '../../util/auth';
@@ -10,6 +11,7 @@ const SignupForm = () => {
   const [form] = Form.useForm();
   const router = useRouter();
   const { setLoading } = useLoading();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [signUpMode, setSignUpMode] = useState(
     router?.query?.from === '/recruiters' ? 'recruiter' : 'student'
@@ -29,9 +31,9 @@ const SignupForm = () => {
         password,
       });
 
-      // enqueueSnackbar('User Registered Successfully', {
-      //   variant: 'success',
-      // });
+      enqueueSnackbar('User Registered Successfully', {
+        variant: 'success',
+      });
 
       console.log('User created', newUser);
 
@@ -41,12 +43,14 @@ const SignupForm = () => {
         email: email,
         password: password,
       });
-      //   enqueueSnackbar(`You are Logged In`, { variant: 'success' });
+      enqueueSnackbar(`You are Logged In`, { variant: 'success' });
 
       if (!userLoggedIn.error) {
+        enqueueSnackbar(`Login Failed`, { variant: 'error' });
         await router.replace('/dashboard');
       }
     } catch (error) {
+      enqueueSnackbar(`Sign Up Failed`, { variant: 'error' });
       console.error('Error signing up!:', error);
     } finally {
       form.resetFields();

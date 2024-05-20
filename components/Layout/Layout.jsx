@@ -122,9 +122,20 @@ const DefaultUnprotectedLayout = ({ children }) => {
           <Footer
             style={{ height: '50px', padding: '8px 50px', lineHeight: '32px' }}
           >
-            <Text type="secondary" style={{ textAlign: 'center' }}>
-              © 2024 Vigilant Tribble. All rights reserved.
-            </Text>
+            <Flex justify="space-between">
+              <Text type="secondary" style={{ textAlign: 'center' }}>
+                © 2024 Vigilant Tribble. All rights reserved.
+              </Text>
+              <Button
+                type="link"
+                onClick={() => {
+                  router.push('/feedback');
+                }}
+                style={{ color: 'gray' }}
+              >
+                <u>Leave us a feedback</u>
+              </Button>
+            </Flex>
           </Footer>
         </Layout>
       </Layout>

@@ -9,6 +9,8 @@ import withLayout from '../hoc/withLayout';
 import HeroImg from '../public/images/HeroImage.jpg';
 import { useLoading } from '../store/loading-context';
 
+// customize the components for unprotected pages
+
 const HomePage = () => {
   const { loading, setLoading } = useLoading();
   const router = useRouter();
@@ -18,14 +20,6 @@ const HomePage = () => {
 
   return (
     <Flex vertical align="center">
-      {/* <Typography
-        variant="overline"
-        color="textSecondary"
-        gutterBottom
-        fontSize={36}
-      >
-        Vigilant Tribble
-      </Typography> */}
       <Flex
         vertical
         gap={48}
