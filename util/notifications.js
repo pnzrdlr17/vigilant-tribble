@@ -1,8 +1,6 @@
 export const notificationToAllStudents = async (notification) => {
   try {
-    const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-
-    const response = await fetch(`${baseUrl}/api/notifications/all-students`, {
+    const response = await fetch(`/api/notifications/all-students`, {
       method: 'POST',
       body: JSON.stringify(notification),
       headers: {
@@ -27,18 +25,13 @@ export const notificationToAllStudents = async (notification) => {
 
 export const notificationToUser = async (notification, receiverEmail) => {
   try {
-    const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-
-    const response = await fetch(
-      `${baseUrl}/api/notifications/${receiverEmail}`,
-      {
-        method: 'POST',
-        body: JSON.stringify(notification),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await fetch(`/api/notifications/${receiverEmail}`, {
+      method: 'POST',
+      body: JSON.stringify(notification),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     const data = await response.json();
 
     if (!response.ok) {

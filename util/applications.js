@@ -1,6 +1,5 @@
 export const getAllApplications = async () => {
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-  const response = await fetch(`${baseUrl}/api/applications`);
+  const response = await fetch(`/api/applications`);
 
   const responseBody = await response.json();
 
@@ -15,8 +14,7 @@ export const getAllApplications = async () => {
 };
 
 export const sendApplicationChatMessage = async (data) => {
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-  const response = await fetch(`${baseUrl}/api/applications/send-message`, {
+  const response = await fetch(`/api/applications/send-message`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

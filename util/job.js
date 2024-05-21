@@ -34,8 +34,7 @@ export const createJob = async (job) => {
 };
 
 export const getAllJobs = async () => {
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-  const response = await fetch(`${baseUrl}/api/job/all-jobs`);
+  const response = await fetch(`/api/job/all-jobs`);
 
   const responseBody = await response.json();
 
@@ -55,9 +54,7 @@ export const getAllJobs = async () => {
 
 export const applyJob = async (data) => {
   console.log('Applying job', data);
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-
-  const response = await fetch(`${baseUrl}/api/job/apply-job`, {
+  const response = await fetch(`/api/job/apply-job`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -75,8 +72,7 @@ export const applyJob = async (data) => {
 };
 
 export const getJobById = async (jobId) => {
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-  const response = await fetch(`${baseUrl}/api/job/${jobId}`);
+  const response = await fetch(`/api/job/${jobId}`);
 
   const data = await response.json();
 
@@ -88,9 +84,7 @@ export const getJobById = async (jobId) => {
 };
 
 export const toggleSaveJob = async (data) => {
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-
-  const response = await fetch(`${baseUrl}/api/job/save-job`, {
+  const response = await fetch(`/api/job/save-job`, {
     method: 'PATCH',
     body: JSON.stringify(data),
     headers: {
