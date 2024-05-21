@@ -11,7 +11,7 @@ export async function verifyPassword(password, hashedPassword) {
 }
 
 export const createUser = async (user) => {
-  const response = await fetch('/api/auth/signup', {
+  const response = await fetch(`${process.env.BASE_URL}/api/auth/signup`, {
     method: 'POST',
     body: JSON.stringify(user),
     headers: {

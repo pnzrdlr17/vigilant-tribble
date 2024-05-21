@@ -1,5 +1,5 @@
 export const logMessage = async (data) => {
-  const response = await fetch('/api/contactus', {
+  const response = await fetch(`${process.env.BASE_URL}/api/contactus`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -20,7 +20,7 @@ export const logFeedback = async (message) => {
   if (!message) {
     throw new Error('Invalid input');
   }
-  const response = await fetch('/api/feedback', {
+  const response = await fetch(`${process.env.BASE_URL}/api/feedback`, {
     method: 'POST',
     body: JSON.stringify({
       message,

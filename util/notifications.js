@@ -1,12 +1,15 @@
 export const notificationToAllStudents = async (notification) => {
   try {
-    const response = await fetch(`/api/notifications/all-students`, {
-      method: 'POST',
-      body: JSON.stringify(notification),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      `${process.env.BASE_URL}/api/notifications/all-students`,
+      {
+        method: 'POST',
+        body: JSON.stringify(notification),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     const data = await response.json();
 
     if (!response.ok) {
@@ -25,13 +28,16 @@ export const notificationToAllStudents = async (notification) => {
 
 export const notificationToUser = async (notification, receiverEmail) => {
   try {
-    const response = await fetch(`/api/notifications/${receiverEmail}`, {
-      method: 'POST',
-      body: JSON.stringify(notification),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      `${process.env.BASE_URL}/api/notifications/${receiverEmail}`,
+      {
+        method: 'POST',
+        body: JSON.stringify(notification),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     const data = await response.json();
 
     if (!response.ok) {

@@ -1,25 +1,11 @@
 import { Typography } from '@mui/material';
 import { Divider, Flex } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DefaultUnprotectedLayout } from '../components/Layout/Layout';
 import withLayout from '../hoc/withLayout';
 
 const Announcements = () => {
   const [notifications, setNotifications] = useState([]);
-
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        // const response = await fetch('/api/notifications');
-        // const data = await response.json();
-        // setNotifications(data);
-      } catch (error) {
-        console.error('Error fetching notifications:', error);
-      }
-    };
-
-    fetchNotifications();
-  }, []);
 
   return (
     <Flex vertical align="center" gap={16}>

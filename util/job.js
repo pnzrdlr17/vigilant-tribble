@@ -16,7 +16,7 @@ export const getJobTypeDisplayText = (jobType) => {
 };
 
 export const createJob = async (job) => {
-  const response = await fetch('/api/job/new-job', {
+  const response = await fetch(`${process.env.BASE_URL}/api/job/new-job`, {
     method: 'POST',
     body: JSON.stringify(job),
     headers: {
@@ -34,7 +34,7 @@ export const createJob = async (job) => {
 };
 
 export const getAllJobs = async () => {
-  const response = await fetch(`/api/job/all-jobs`);
+  const response = await fetch(`${process.env.BASE_URL}/api/job/all-jobs`);
 
   const responseBody = await response.json();
 
@@ -54,7 +54,7 @@ export const getAllJobs = async () => {
 
 export const applyJob = async (data) => {
   console.log('Applying job', data);
-  const response = await fetch(`/api/job/apply-job`, {
+  const response = await fetch(`${process.env.BASE_URL}/api/job/apply-job`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -72,7 +72,7 @@ export const applyJob = async (data) => {
 };
 
 export const getJobById = async (jobId) => {
-  const response = await fetch(`/api/job/${jobId}`);
+  const response = await fetch(`${process.env.BASE_URL}/api/job/${jobId}`);
 
   const data = await response.json();
 
@@ -84,7 +84,7 @@ export const getJobById = async (jobId) => {
 };
 
 export const toggleSaveJob = async (data) => {
-  const response = await fetch(`/api/job/save-job`, {
+  const response = await fetch(`${process.env.BASE_URL}/api/job/save-job`, {
     method: 'PATCH',
     body: JSON.stringify(data),
     headers: {
