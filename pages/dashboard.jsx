@@ -27,7 +27,7 @@ const Dashboard = (props) => {
   }
 
   if (session?.user?.role === 'recruiter') {
-    return <RecruiterDashboard jobs={jobs} />;
+    return <RecruiterDashboard jobs={jobs} applications={applications} />;
   }
 
   if (session?.user?.role === 'admin') {

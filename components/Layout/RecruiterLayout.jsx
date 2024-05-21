@@ -1,10 +1,11 @@
 import { Button, Flex, Layout, theme, Typography } from 'antd';
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useLoading } from '../../store/loading-context';
+import { Footer } from './Footer';
 
-const { Header, Sider, Content, Footer } = Layout;
-const { Title, Text } = Typography;
+const { Header, Content } = Layout;
+const { Title } = Typography;
 
 const navButtonsStyle = {
   textDecoration: 'none',
@@ -18,6 +19,7 @@ const RecruiterLayout = ({ children }) => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   const router = useRouter();
+  const currentPath = router.pathname;
   const { data: session } = useSession();
   const { setLoading } = useLoading();
 
@@ -49,7 +51,7 @@ const RecruiterLayout = ({ children }) => {
           </Title>
 
           <Flex gap={8}>
-            {router.pathname !== '/dashboard' && (
+            {currentPath !== '/dashboard' && (
               <Button
                 type="link"
                 style={navButtonsStyle}
@@ -62,39 +64,41 @@ const RecruiterLayout = ({ children }) => {
                 Dashboard
               </Button>
             )}
-            <Button
-              type="link"
-              style={navButtonsStyle}
-              onClick={async () => {
-                setLoading(true);
-                await router.push('/recruiter/new-job');
-                setLoading(false);
-              }}
-            >
-              New Job
-            </Button>
-            <Button
-              type="link"
-              style={navButtonsStyle}
-              onClick={async () => {
-                setLoading(true);
-                await router.push('/inbox');
-                setLoading(false);
-              }}
-            >
-              Inbox
-            </Button>
-            {session && (
+            {currentPath !== '/recruiter/new-job' && (
               <Button
                 type="link"
                 style={navButtonsStyle}
                 onClick={async () => {
                   setLoading(true);
-                  await signOut();
+                  await router.push('/recruiter/new-job');
                   setLoading(false);
                 }}
               >
-                Logout
+                New Job
+              </Button>
+            )}
+            {currentPath !== '/inbox' && (
+              <Button
+                type="link"
+                style={navButtonsStyle}
+                onClick={async () => {
+                  setLoading(true);
+                  await router.push('/inbox');
+                  setLoading(false);
+                }}
+              >
+                Inbox
+              </Button>
+            )}
+            {session && (
+              <Button
+                type="link"
+                style={navButtonsStyle}
+                onClick={async () => {
+                  router.push('/profile');
+                }}
+              >
+                Profile
               </Button>
             )}
           </Flex>
@@ -114,13 +118,7 @@ const RecruiterLayout = ({ children }) => {
           >
             {children}
           </Content>
-          <Footer
-            style={{ height: '50px', padding: '8px 50px', lineHeight: '32px' }}
-          >
-            <Text type="secondary" style={{ textAlign: 'center' }}>
-              © 2024 Vigilant Tribble. All rights reserved.
-            </Text>
-          </Footer>
+          <Footer />
         </Layout>
       </Layout>
     </Layout>

@@ -34,23 +34,6 @@ export const createJob = async (job) => {
 };
 
 export const getAllJobs = async () => {
-  // return [
-  //   {
-  //     id: '1',
-  //     title: 'Software Developer',
-  //     company: 'Google',
-  //     description: 'Software Developer at Google',
-  //     location: 'Mountain View, CA',
-  //     requirements: 'React, Node.js, MongoDB',
-  //     domain: 'Software Development',
-  //     jobOwner: '',
-  //     applications: [],
-  //     status: 'active',
-  //     timestamp: new Date().toISOString(),
-  //   },
-  // ];
-
-  console.log('Fetching all jobs');
   const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:3000';
   const response = await fetch(`${baseUrl}/api/job/all-jobs`);
 

@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useLoading } from '../../store/loading-context';
 import { Footer } from './Footer';
 
-const { Header, Sider, Content } = Layout;
-const { Title, Text } = Typography;
+const { Header, Content } = Layout;
+const { Title } = Typography;
 
 const navButtonsStyle = {
   textDecoration: 'none',

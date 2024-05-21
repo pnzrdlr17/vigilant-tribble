@@ -117,7 +117,7 @@ const JobCard = (props) => {
             width: '40%',
           }}
           onClick={() => {
-            router.push(`/job/${_id}`);
+            router.push(`/job/${jobId}`);
           }}
         >
           View

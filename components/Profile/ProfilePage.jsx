@@ -7,6 +7,7 @@ const { Title, Text, Paragraph } = Typography;
 const ProfilePage = (props) => {
   const { userInfo, session } = props;
   const hasEditPermission = session?.user?.email === userInfo?.email || false;
+  const isStudent = session?.user?.role === 'student';
   const { name, email, about, phone, course, graduatingYear, cgpa, skills } =
     userInfo;
   const { setLoading } = useLoading();
@@ -38,13 +39,15 @@ const ProfilePage = (props) => {
               Phone: {phone}
             </Text>
           )}
-          <Text
-            style={{ fontSize: 16, color: 'gray' }}
-            copyable
-            editable={hasEditPermission}
-          >
-            Resume: https://example.com/resume.pdf
-          </Text>
+          {isStudent && (
+            <Text
+              style={{ fontSize: 16, color: 'gray' }}
+              copyable
+              editable={hasEditPermission}
+            >
+              Resume: https://example.com/resume.pdf
+            </Text>
+          )}
         </Flex>
 
         <div>
@@ -92,22 +95,43 @@ const ProfilePage = (props) => {
             </>
           )}
 
-          <Title level={5}>Experience</Title>
-          <Text editable={hasEditPermission}>Intern at XYZ Company</Text>
-          <Text editable={hasEditPermission}>
-            Software Developer at ABC Company
-          </Text>
-          <Divider />
+          {isStudent && (
+            <>
+              <Title level={5}>Experience</Title>
+              <Text editable={hasEditPermission}>Intern at XYZ Company</Text>
+              <Text editable={hasEditPermission}>
+                Software Developer at ABC Company
+              </Text>
+              <Divider />
+            </>
+          )}
 
-          <Title level={5}>Projects</Title>
-          <Text editable={hasEditPermission}>Project 1</Text>
-          <Text editable={hasEditPermission}>Project 2</Text>
-          <Divider />
+          {isStudent && (
+            <>
+              <Title level={5}>Projects</Title>
+              <Text editable={hasEditPermission}>Project 1</Text>
+              <Text editable={hasEditPermission}>Project 2</Text>
+              <Divider />
+            </>
+          )}
 
           {skills && (
             <>
               <Title level={5}>Skills</Title>
               <Text editable={hasEditPermission}>{skills}</Text>
+              <Divider />
+            </>
+          )}
+
+          {!isStudent && (
+            <>
+              <Title level={5}>Company</Title>
+              <Text editable={hasEditPermission}>
+                Company Name: XYZ Company
+              </Text>
+              <Text editable={hasEditPermission}>
+                Company Address: Pune, Maharashtra, India
+              </Text>
               <Divider />
             </>
           )}

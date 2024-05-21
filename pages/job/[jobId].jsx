@@ -1,6 +1,7 @@
 import { getSession } from 'next-auth/react';
 import Error from 'next/error';
 import { useMemo } from 'react';
+import RecruiterJobDetails from '../../components/Job/RecruiterJobDetailsPage';
 import StudentJobDetails from '../../components/Job/StudentJobDetailsPage';
 import { Loading } from '../../components/Loading';
 import { useLoading } from '../../store/loading-context';
@@ -36,11 +37,39 @@ const JobDetailsPage = (props) => {
   }
 
   if (session?.user?.role === 'recruiter') {
-    return <RecruiterJobDetails jobs={job} />;
+    const userApplications = useMemo(
+      () =>
+        applications.filter((app) => {
+          return app.jobOwner === session?.user?.email;
+        }),
+      [applications]
+    );
+
+    return (
+      <RecruiterJobDetails
+        job={job}
+        userApplications={userApplications}
+        session={session}
+      />
+    );
   }
 
   if (session?.user?.role === 'admin') {
-    return <RecruiterJobDetails jobs={job} />;
+    const userApplications = useMemo(
+      () =>
+        applications.filter((app) => {
+          return app.jobOwner === session?.user?.email;
+        }),
+      [applications]
+    );
+
+    return (
+      <RecruiterJobDetails
+        job={job}
+        userApplications={userApplications}
+        session={session}
+      />
+    );
   }
 
   return <Error statusCode={404} />;
