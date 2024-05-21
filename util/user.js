@@ -1,5 +1,5 @@
 export const getUserData = async (userEmail) => {
-  const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:3000';
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
 
   const response = await fetch(`${baseUrl}/api/user/${userEmail}`);
   const data = await response.json();
@@ -15,7 +15,7 @@ export const getUserData = async (userEmail) => {
 };
 
 export const getUserDataById = async (userId) => {
-  const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:3000';
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
 
   const response = await fetch(`${baseUrl}/api/user/id/${userId}`);
   const data = await response.json();

@@ -1,6 +1,6 @@
 export const notificationToAllStudents = async (notification) => {
   try {
-    const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:3000';
+    const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
 
     const response = await fetch(`${baseUrl}/api/notifications/all-students`, {
       method: 'POST',
@@ -27,7 +27,7 @@ export const notificationToAllStudents = async (notification) => {
 
 export const notificationToUser = async (notification, receiverEmail) => {
   try {
-    const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:3000';
+    const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
 
     const response = await fetch(
       `${baseUrl}/api/notifications/${receiverEmail}`,

@@ -3,19 +3,17 @@ import { connectToDatabase } from '../../../util/db';
 
 async function handler(req, res) {
   if (req.method !== 'PATCH') {
-    return;
+    return res.status(405).json({ message: 'Method not allowed' });
   }
 
   const { session, applicationId, message, timestamp } = req.body;
 
   if (!applicationId || !message || !timestamp) {
-    res.status(422).json({ message: 'Invalid input' });
-    return;
+    return res.status(422).json({ message: 'Invalid input' });
   }
 
   if (!session) {
-    res.status(401).json({ message: 'Not authenticated!' });
-    return;
+    return res.status(401).json({ message: 'Not authenticated!' });
   }
 
   const client = await connectToDatabase();
@@ -36,9 +34,8 @@ async function handler(req, res) {
   });
 
   if (!application) {
-    res.status(402).json({ message: 'Not Found' });
     client.close();
-    return;
+    return res.status(402).json({ message: 'Not Found' });
   }
 
   if (
@@ -46,9 +43,8 @@ async function handler(req, res) {
     application.recruiterEmail !== user.email &&
     session.user.role !== 'admin'
   ) {
-    res.status(402).json({ message: 'Not allowed' });
     client.close();
-    return;
+    return res.status(402).json({ message: 'Not allowed' });
   }
 
   const result = await applicationsCollection.updateOne(
@@ -69,9 +65,8 @@ async function handler(req, res) {
     }
   );
 
-  res.status(201).json({ message: 'Message sent successfully!' });
-
   client.close();
+  return res.status(201).json({ message: 'Message sent successfully!' });
 }
 
 export default handler;
